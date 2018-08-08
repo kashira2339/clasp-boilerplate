@@ -22,3 +22,30 @@ npx clasp login
 ```json
 {"scriptId":"<your script id>"}
 ```
+
+## How to use another file function?
+
+First, define function to another file.
+
+```ts
+// src/utils.ts
+function fetchGoogle(): string {
+  return UrlFetchApp.fetch('https://google.com').getContentText()
+}
+```
+
+Next, write type define code and put into `types/*.d.ts`
+
+```ts
+// types/utils.d.ts
+declare function fetchGoogle(): string
+```
+
+And call function from main code file!
+
+```ts
+// src/Code.ts
+function main() {
+  Logger.log(fetchGoogle())
+}
+```
